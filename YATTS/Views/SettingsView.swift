@@ -44,7 +44,7 @@ struct SettingsView: View {
                         .font(.caption)
                 }
                 
-                Section("Voice Selection") {
+                Section(header: Text("Voice Selection")) {
                     Picker("Voice", selection: $selectedVoice) {
                         ForEach(Settings.supportedVoices, id: \.self) { voice in
                             Text(voice.capitalized).tag(voice)
@@ -52,17 +52,19 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("Model Selection") {
+                Section {
                     Picker("Model", selection: $selectedModel) {
                         Text("Standard (tts-1)").tag("tts-1")
                         Text("HD Quality (tts-1-hd)").tag("tts-1-hd")
                     }
+                } header: {
+                    Text("Model Selection")
                 } footer: {
                     Text("HD quality provides better audio but costs more")
                         .font(.caption)
                 }
                 
-                Section("Storage") {
+                Section(header: Text("Storage")) {
                     HStack {
                         Text("Total Storage Used")
                         Spacer()
