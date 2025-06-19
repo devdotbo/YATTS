@@ -87,9 +87,15 @@ struct AudioItemRow: View {
                 .lineLimit(1)
             
             HStack {
-                Label(viewModel.formatDuration(item.duration), systemImage: "clock")
+                Label(viewModel.formatDuration(item.totalDuration), systemImage: "clock")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                
+                if item.isChunked {
+                    Label("\(item.downloadedChunks)/\(item.totalChunks) chunks", systemImage: "square.stack.3d.up")
+                        .font(.caption)
+                        .foregroundStyle(item.isFullyDownloaded ? .secondary : .orange)
+                }
                 
                 Spacer()
                 

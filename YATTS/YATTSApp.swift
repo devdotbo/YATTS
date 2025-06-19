@@ -13,6 +13,7 @@ struct YATTSApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             AudioItem.self,
+            AudioChunk.self,
             Settings.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)

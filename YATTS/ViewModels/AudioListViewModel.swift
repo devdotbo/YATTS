@@ -11,7 +11,13 @@ final class AudioListViewModel: ObservableObject {
     
     func deleteItem(_ item: AudioItem, from context: ModelContext) {
         do {
-            try fileService.deleteAudioFile(at: item.audioFilePath)
+            if item.isChunked {
+                // Delete all chunk files
+                try fileService.deleteAllChunks(for: item.id)
+            } else {
+                // Delete single file (legacy)
+                try fileService.deleteAudioFile(at: item.audioFilePath)
+            }
             context.delete(item)
             try context.save()
         } catch {

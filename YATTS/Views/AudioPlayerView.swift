@@ -25,9 +25,19 @@ struct AudioPlayerView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
-                    Text("\(audioItem.textContent.split(separator: " ").count) words")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 12) {
+                        Text("\(audioItem.textContent.split(separator: " ").count) words")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        
+                        if audioItem.isChunked && viewModel.audioService.totalChunks > 0 {
+                            Text("•")
+                                .foregroundStyle(.secondary)
+                            Text("Chunk \(viewModel.audioService.currentChunkIndex + 1) of \(viewModel.audioService.totalChunks)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
                 }
                 
                 VStack(spacing: 8) {

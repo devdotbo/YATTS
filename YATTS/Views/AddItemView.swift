@@ -17,10 +17,20 @@ struct AddItemView: View {
             VStack(spacing: 0) {
                 if viewModel.isProcessing {
                     VStack(spacing: 20) {
-                        ProgressView()
-                            .scaleEffect(1.5)
-                        Text("Generating audio...")
+                        ProgressView(value: viewModel.downloadProgress)
+                            .progressViewStyle(LinearProgressViewStyle())
+                            .scaleEffect(y: 2)
+                            .padding(.horizontal, 40)
+                        
+                        Text(viewModel.processingMessage)
                             .font(.headline)
+                        
+                        if viewModel.totalChunks > 1 {
+                            Text("Chunk \(viewModel.currentChunk) of \(viewModel.totalChunks)")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        
                         Text("This may take a moment")
                             .font(.caption)
                             .foregroundStyle(.secondary)
