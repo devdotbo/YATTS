@@ -16,24 +16,13 @@ A SwiftUI iOS app that converts text to speech using OpenAI's TTS API with offli
 
 ## Setup Instructions
 
-### 1. Add OpenAI Package Dependency
-
-In Xcode:
-1. Select your project in the navigator
-2. Select the YATTS target
-3. Go to "Package Dependencies" tab
-4. Click "+" to add a package
-5. Enter: `https://github.com/MacPaw/OpenAI.git`
-6. Click "Add Package"
-7. Select version 0.3.0 or later
-
-### 2. Configure Minimum iOS Version
+### 1. Configure Minimum iOS Version
 
 1. Select your project in the navigator
 2. Select the YATTS target
 3. Under "Minimum Deployments", set iOS to 17.0
 
-### 3. Add Background Audio Capability
+### 2. Add Background Audio Capability
 
 1. Select your project in the navigator
 2. Select the YATTS target
@@ -42,13 +31,13 @@ In Xcode:
 5. Add "Background Modes"
 6. Check "Audio, AirPlay, and Picture in Picture"
 
-### 4. Get OpenAI API Key
+### 3. Get OpenAI API Key
 
 1. Go to https://platform.openai.com/api-keys
 2. Create a new API key
 3. Copy the key
 
-### 5. Run the App
+### 4. Run the App
 
 1. Build and run the app on your device or simulator
 2. Go to Settings tab
@@ -91,7 +80,7 @@ In Xcode:
 - **SwiftData** for persistence
 - **AVFoundation** for audio playback
 - **MVVM** architecture pattern
-- **MacPaw/OpenAI** Swift package for API integration
+- **URLSession** for OpenAI API integration
 
 ## Requirements
 
