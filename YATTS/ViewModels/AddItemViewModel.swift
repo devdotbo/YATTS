@@ -110,9 +110,9 @@ final class AddItemViewModel: ObservableObject {
             context.insert(audioItem)
             try context.save()
             
-            text = ""
-            processingMessage = ""
-            isProcessing = false
+            self.text = ""
+            self.processingMessage = ""
+            self.isProcessing = false
         } catch {
             errorMessage = error.localizedDescription
             showError = true
@@ -188,12 +188,12 @@ final class AddItemViewModel: ObservableObject {
             audioItem.duration = audioItem.totalDuration
             try context.save()
             
-            text = ""
-            processingMessage = ""
-            currentChunk = 0
-            totalChunks = 0
-            downloadProgress = 0
-            isProcessing = false
+            self.text = ""
+            self.processingMessage = ""
+            self.currentChunk = 0
+            self.totalChunks = 0
+            self.downloadProgress = 0
+            self.isProcessing = false
             
         } catch {
             errorMessage = error.localizedDescription

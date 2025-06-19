@@ -94,7 +94,7 @@ struct AudioItemRow: View {
                 if item.isChunked {
                     Label("\(item.downloadedChunks)/\(item.totalChunks) chunks", systemImage: "square.stack.3d.up")
                         .font(.caption)
-                        .foregroundStyle(item.isFullyDownloaded ? .secondary : .orange)
+                        .foregroundStyle(item.isFullyDownloaded ? Color.secondary : Color.orange)
                 }
                 
                 Spacer()

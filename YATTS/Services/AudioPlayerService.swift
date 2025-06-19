@@ -124,7 +124,7 @@ final class AudioPlayerService: NSObject, ObservableObject {
             isPlaying = true
             currentChunkIndex = index
             
-            if !timer?.isValid ?? true {
+            if timer?.isValid != true {
                 startTimer()
             }
         } catch {
