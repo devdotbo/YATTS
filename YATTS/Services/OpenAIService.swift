@@ -3,6 +3,7 @@ import Foundation
 final class OpenAIService {
     private var apiKey: String?
     private let baseURL = "https://api.openai.com/v1/audio/speech"
+    static let maxCharacterLimit = 4096
     
     func configure(with apiKey: String) {
         self.apiKey = apiKey
@@ -15,6 +16,10 @@ final class OpenAIService {
     ) async throws -> Data {
         guard let apiKey = apiKey, !apiKey.isEmpty else {
             throw OpenAIError.missingAPIKey
+        }
+        
+        guard text.count <= Self.maxCharacterLimit else {
+            throw OpenAIError.textTooLong(limit: Self.maxCharacterLimit, actual: text.count)
         }
         
         guard let url = URL(string: baseURL) else {
@@ -43,6 +48,11 @@ final class OpenAIService {
         }
         
         guard httpResponse.statusCode == 200 else {
+            if let errorData = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let error = errorData["error"] as? [String: Any],
+               let message = error["message"] as? String {
+                throw OpenAIError.apiError(message: message, statusCode: httpResponse.statusCode)
+            }
             throw OpenAIError.httpError(statusCode: httpResponse.statusCode)
         }
         
@@ -69,6 +79,8 @@ enum OpenAIError: LocalizedError {
     case invalidURL
     case invalidResponse
     case httpError(statusCode: Int)
+    case textTooLong(limit: Int, actual: Int)
+    case apiError(message: String, statusCode: Int)
     
     var errorDescription: String? {
         switch self {
@@ -80,6 +92,10 @@ enum OpenAIError: LocalizedError {
             return "Invalid response from server"
         case .httpError(let statusCode):
             return "HTTP error: \(statusCode)"
+        case .textTooLong(let limit, let actual):
+            return "Text is too long: \(actual) characters (limit: \(limit) characters)"
+        case .apiError(let message, let statusCode):
+            return "API Error (\(statusCode)): \(message)"
         }
     }
 }

@@ -13,11 +13,19 @@ final class AddItemViewModel: ObservableObject {
     private let fileService = FileStorageService.shared
     
     var canGenerate: Bool {
-        !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !isProcessing
+        !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && 
+        !isProcessing && 
+        text.count <= OpenAIService.maxCharacterLimit
     }
     
     var characterCount: String {
-        "\(text.count) characters"
+        let count = text.count
+        let limit = OpenAIService.maxCharacterLimit
+        return "\(count) / \(limit) characters"
+    }
+    
+    var isOverLimit: Bool {
+        text.count > OpenAIService.maxCharacterLimit
     }
     
     func generateTitle(from text: String) -> String {

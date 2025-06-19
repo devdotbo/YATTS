@@ -45,7 +45,8 @@ struct AddItemView: View {
                         HStack {
                             Text(viewModel.characterCount)
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(viewModel.isOverLimit ? .red : .secondary)
+                                .fontWeight(viewModel.isOverLimit ? .semibold : .regular)
                             
                             Spacer()
                             
@@ -65,6 +66,13 @@ struct AddItemView: View {
                             .disabled(viewModel.text.isEmpty)
                         }
                         .padding(.horizontal)
+                        
+                        if viewModel.isOverLimit {
+                            Text("Text exceeds the maximum limit of \(OpenAIService.maxCharacterLimit) characters")
+                                .font(.caption)
+                                .foregroundStyle(.red)
+                                .padding(.horizontal)
+                        }
                         
                         Button {
                             generateAudio()
