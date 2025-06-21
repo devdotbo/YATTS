@@ -1,8 +1,18 @@
 # YATTS - Yet Another Text-to-Speech iOS App
 
+
+https://github.com/user-attachments/assets/1dcbace2-7fbd-416a-a9db-3f07bff890bd
+
+https://github.com/user-attachments/assets/3ca0d8e7-0847-429a-ae60-35086b03e2c3
+
 A SwiftUI iOS app that converts text to speech using OpenAI's TTS API with offline playback support.
 
 ## Features
+
+
+
+
+
 
 - ✅ Convert text to speech using OpenAI's TTS API
 - ✅ SwiftData for persistent storage
